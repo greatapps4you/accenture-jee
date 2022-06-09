@@ -10,14 +10,24 @@
 
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Name" />
-			<h:inputText value="#{customerBean.customer.name}" />
+			<h:inputText id="customerName" value="#{customerBean.customer.name}" />
 
 			<h:outputLabel value="Email" />
-			<h:inputText value="#{customerBean.customer.email}" />
-
-			<h:commandButton action="#{customerBean.save()}" value="Submit"></h:commandButton>
+			<h:inputText id="customerEmail" value="#{customerBean.customer.email}" />
+		
+			<h:commandButton action="#{customerBean.save}" value="Save">
+				<f:ajax execute="@form" render="customerName customerEmail :table" />
+			</h:commandButton>
 		</h:panelGrid>
 
 	</h:form>
+
+	<h:dataTable id="table" value="#{customerBean.customers}"
+		var="customer">
+		<h:column>#{customer.id}</h:column>
+		<h:column>#{customer.name}</h:column>
+		<h:column>#{customer.email}</h:column>
+	</h:dataTable>
+
 </h:body>
 </html>

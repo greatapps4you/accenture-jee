@@ -1,6 +1,20 @@
 package com.accenture.j2ee.entities;
 
+import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+@Entity
+@SequenceGenerator(name="CUSTOMER_SEQ", initialValue=1, allocationSize=1)
 public class Customer {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUSTOMER_SEQ")
+	private Long id;
 	private String name;
 	private String email;
 
@@ -8,6 +22,18 @@ public class Customer {
 		super();
 		this.name = name;
 		this.email = email;
+	}
+
+	public Customer() {
+		super();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -27,10 +53,25 @@ public class Customer {
 	}
 
 	@Override
-	public String toString() {
-		return "Customer [name=" + name + ", email=" + email + "]";
+	public int hashCode() {
+		return Objects.hash(email, name);
 	}
-	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		return Objects.equals(email, other.email) && Objects.equals(name, other.name);
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", email=" + email + "]";
+	}
 
 }
