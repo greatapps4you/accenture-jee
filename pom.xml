@@ -19,10 +19,9 @@
 		<dependency>
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-api</artifactId>
-			<version>8.0.0</version>
+			<version>9.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -34,6 +33,30 @@
 
 	<build>
 		<finalName>j2ee</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-jar-maven-plugin</artifactId>
+				<version>5.0.0.Final</version>
+				<configuration>
+					<feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)</feature-pack-location>
+					<layers>
+						<layer>jaxrs-server</layer>
+					</layers>
+					<plugin-options>
+						<jboss-fork-embedded>true</jboss-fork-embedded>
+					</plugin-options>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>package</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>
