@@ -10,7 +10,7 @@ public class HelloWorld {
 
 	@GET
 	public String hello() {
-		return "Heloo Jakarta EE";
+		return "Heloo jakarta EE";
 	}
 
 }
