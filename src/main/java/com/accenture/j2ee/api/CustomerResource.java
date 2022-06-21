@@ -1,9 +1,11 @@
 package com.accenture.j2ee.api;
 
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-@Path("/customer")
+@Path("customers")
+@RequestScoped
 public class CustomerResource {
 	
 	@GET
